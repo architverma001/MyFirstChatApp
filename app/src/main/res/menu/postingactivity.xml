@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="choose file"
+        android:id="@+id/choose_img"/>
+
+    <item android:id="@+id/upload"
+        android:title="upload"/>
+</menu>
