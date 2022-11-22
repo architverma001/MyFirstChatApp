@@ -14,7 +14,7 @@
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="90dp"
-        android:src="@drawable/chat" />
+        android:src="@drawable/inbox" />
 
     <EditText
         android:id="@+id/etName"

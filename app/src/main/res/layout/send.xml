@@ -31,9 +31,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/text_send_message_time"
-                android:textSize="10dp"
-                android:padding="2dp"
-                android:layout_margin="2dp"
+                android:textSize="11dp"
+                android:padding="2.2dp"
+                android:layout_marginRight="8dp"
                 android:textColor="@color/white"
                 android:layout_gravity="end"
 

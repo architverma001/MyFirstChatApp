@@ -10,9 +10,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/chat"
+        android:icon="@drawable/inbox"
         android:label="MyChats"
-        android:roundIcon="@drawable/chat"
+        android:roundIcon="@drawable/inbox"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">

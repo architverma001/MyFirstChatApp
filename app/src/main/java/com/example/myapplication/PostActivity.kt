@@ -61,7 +61,7 @@ class PostActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==0 && resultCode==Activity.RESULT_OK){
             val uri = data?.data
-            postimage.setImageURI(uri)
+            postImage.setImageURI(uri)
            // myProfilePic.setImageURI(uri)
 
         }

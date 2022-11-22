@@ -1,10 +1,12 @@
 package com.example.myapplication
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 
@@ -14,10 +16,12 @@ class login : AppCompatActivity() {
     private lateinit var btnLogin: Button
     private lateinit var btnSignup:Button
     private lateinit var mAuth:FirebaseAuth
+    private lateinit var loader:ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         mAuth = FirebaseAuth.getInstance()
+        loader = ProgressDialog(this)
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
         btnLogin = findViewById(R.id.btnLogin)
@@ -29,6 +33,9 @@ class login : AppCompatActivity() {
             Toast.makeText(this,"Signup page",Toast.LENGTH_SHORT).show()
         }
         btnLogin.setOnClickListener {
+            loader.setTitle("Logging in")
+            loader.setMessage("Please wait")
+            loader.show()
             val email = etEmail.text.toString().trim()
             val pass = etPassword.text.toString().trim()
             if(email.isEmpty()){
@@ -55,6 +62,7 @@ class login : AppCompatActivity() {
         mAuth.signInWithEmailAndPassword(email, pass)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    loader.dismiss()
                     // Sign in success, update UI with the signed-in user's information
                     val intent = Intent(this@login,MainActivity::class.java)
                     finish()
@@ -64,10 +72,11 @@ class login : AppCompatActivity() {
                     Toast.makeText(this@login, "Login Successful", Toast.LENGTH_SHORT).show()
 
                 } else {
-
+                    loader.dismiss()
                     Toast.makeText(baseContext, task.exception.toString(), Toast.LENGTH_SHORT).show()
 
                 }
             }
+
     }
 }

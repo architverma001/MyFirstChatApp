@@ -34,6 +34,7 @@ class ChatActivity : AppCompatActivity() {
     var receiveroom :String?=null
     var sendereroom :String?=null
     var lastMessage :String?=null
+    var profilepic :String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -67,6 +68,7 @@ class ChatActivity : AppCompatActivity() {
                 }
 
                 mesageAdapter.notifyDataSetChanged()
+
                 if(mesageAdapter.itemCount>=1){
                 chatRecylerView.smoothScrollToPosition(mesageAdapter.itemCount-1)}
 
@@ -113,7 +115,7 @@ class ChatActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId==R.id.delete){
             AlertDialog.Builder(this)
-                .setTitle("Exit Alert")
+                .setTitle("Alert")
                 .setMessage("Do You Want To Delete The Chats?")
                 .setPositiveButton(android.R.string.ok) { dialog, whichButton ->
                     mDref.child("Chats").child(sendereroom!!).child("chating").removeValue()

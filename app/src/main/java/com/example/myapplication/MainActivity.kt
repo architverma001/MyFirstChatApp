@@ -21,32 +21,57 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.user_layout.*
 import kotlinx.android.synthetic.main.user_layout.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var userList:ArrayList<User>
+    private lateinit var FindList:ArrayList<User>
     private lateinit var adapter: UserAdapter
     private lateinit var mAuth: FirebaseAuth
     private lateinit var searchViews:SearchView
+    private lateinit var profileImg :ImageView
     private lateinit var mDbref :DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        profileImg = findViewById(R.id.search_view_my_profile);
+        profileImg.setOnClickListener{
+            val intent = Intent(this@MainActivity,PostActivity::class.java)
+            startActivity(intent)
+        }
         userList = ArrayList()
-        adapter = UserAdapter(this,userList)
+        FindList = ArrayList()
+       //adapter = UserAdapter(this,userList)
+        adapter = UserAdapter(this,FindList)
 
         mAuth = FirebaseAuth.getInstance()
         searchViews = findViewById(R.id.searchView)
         searchViews.clearFocus()
        searchViews.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
            override fun onQueryTextSubmit(query: String?): Boolean {
-             Toast.makeText(this@MainActivity,"listen",Toast.LENGTH_SHORT).show()
+           //  Toast.makeText(this@MainActivity,"listen",Toast.LENGTH_SHORT).show()
+
                return true
            }
 
            override fun onQueryTextChange(newText: String?): Boolean {
-               Toast.makeText(this@MainActivity,"listen again",Toast.LENGTH_SHORT).show()
+               FindList.clear()
+              // Toast.makeText(this@MainActivity,"listen again",Toast.LENGTH_SHORT).show()
+               val searchText = newText!!.uppercase(Locale.getDefault())
+               if(searchText.isNotEmpty()){
+                   userList.forEach{
+                       if(it.name?.toUpperCase(Locale.getDefault())!!.contains(searchText))
+                            FindList.add(it)
+                   }
+                   recyclerView.adapter!!.notifyDataSetChanged()
+               }
+               else{
+                   FindList.clear()
+                   FindList.addAll(userList)
+                   recyclerView.adapter!!.notifyDataSetChanged()
+               }
                return false
            }
 
@@ -63,7 +88,9 @@ class MainActivity : AppCompatActivity() {
                   if(mAuth.currentUser?.uid!=currentUser?.uid)
                       userList.add(currentUser!!)
                 }
+
              adapter.notifyDataSetChanged()
+                FindList.addAll(userList)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -80,7 +107,7 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onBackPressed() {
         AlertDialog.Builder(this)
-            .setTitle("Exit Alert")
+            .setTitle("/Alert")
             .setMessage("Do You Want To Exit  App?")
             .setPositiveButton(android.R.string.ok) { dialog, whichButton ->
                 super.onBackPressed()
@@ -107,13 +134,7 @@ class MainActivity : AppCompatActivity() {
             return true
         }
 
-        if(item.itemId==R.id.posts){
-            val intents = Intent(this@MainActivity,PostActivity::class.java)
-            Toast.makeText(this,"Directed to GroupChats",Toast.LENGTH_SHORT).show()
-            startActivity(intents)
-            return true
 
-       }
         if(item.itemId==R.id.gchat){
             val intents = Intent(this@MainActivity,GroupChat::class.java)
             Toast.makeText(this,"Directed to posts",Toast.LENGTH_SHORT).show()

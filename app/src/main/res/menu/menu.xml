@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="posts"
-        android:id="@+id/posts"/>
+  
     <item android:title="News"
         android:id="@+id/news"/>
     <item android:title="Group Chat"

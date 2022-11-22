@@ -93,13 +93,17 @@
             android:toDegrees="0">
             <shape android:shape="rectangle">
                 <corners android:radius="4dp"/>
-                <solid android:color="#BDBABA" />
+                <solid android:color="#EFEDED" />
             </shape>
         </rotate>
     </item>
     <item android:left="8dp">
         <shape android:shape="rectangle">
-            <solid android:color="#BDBABA" />
+            <gradient
+                android:startColor="#E9E5E5"
+                android:endColor="#ECEBEB"
+
+                android:centerColor="#F8F8F8"/>
             <corners android:radius="8dp" />
         </shape>
     </item>

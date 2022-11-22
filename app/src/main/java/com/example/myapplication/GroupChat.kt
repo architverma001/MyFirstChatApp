@@ -93,7 +93,7 @@ class GroupChat : AppCompatActivity() {
 
     override fun onBackPressed() {
         AlertDialog.Builder(this)
-            .setTitle("Exit Alert")
+            .setTitle("Alert")
             .setMessage("Do You Want To Exit the group chats?")
             .setPositiveButton(android.R.string.ok) { dialog, whichButton ->
                 super.onBackPressed()
