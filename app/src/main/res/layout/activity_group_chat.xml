@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    tools:context=".ChatActivity">
+    tools:context=".Activities.ChatActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/GChatRecyclerView"
@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:animateLayoutChanges="true"
         android:orientation="horizontal"
         android:weightSum="100">
 

@@ -17,6 +17,25 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".Authentication.splash"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".splashActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".updateName"
             android:exported="false">
             <meta-data
@@ -24,7 +43,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".GroupChat"
+            android:name=".Activities.GroupChat"
             android:exported="false"
             android:label="@string/title_activity_group_chat">
             <meta-data
@@ -32,41 +51,37 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PostActivity"
+            android:name=".Activities.PostActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ChatActivity"
+            android:name=".Activities.ChatActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Signup"
+            android:name=".Authentication.Signup"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".login"
+            android:name=".Authentication.login"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"

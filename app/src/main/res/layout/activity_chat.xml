@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
    android:background="#8BFFFFFF"
     android:padding="8dp"
-    tools:context=".ChatActivity">
+    tools:context=".Activities.ChatActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -15,10 +15,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="2dp"
+
         android:layout_above="@+id/linearlayout"
         android:layout_alignParentTop="true" />
 
     <LinearLayout
+
         android:id="@+id/linearlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

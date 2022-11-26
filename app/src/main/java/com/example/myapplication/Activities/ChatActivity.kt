@@ -1,19 +1,20 @@
-package com.example.myapplication
+package com.example.myapplication.Activities
 
 
 import android.app.AlertDialog
-import android.content.DialogInterface
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Adapters.MessageAdapter
+import com.example.myapplication.R
+import com.example.myapplication.models.message
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_chat.*
@@ -27,12 +28,13 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var messagebox: EditText
     private lateinit var sentButton:ImageView
     private lateinit var mesaagelist:ArrayList<message>
-    private lateinit var mesageAdapter:MessageAdapter
+    private lateinit var mesageAdapter: MessageAdapter
     private lateinit var mDref:DatabaseReference
 
 
     var receiveroom :String?=null
     var sendereroom :String?=null
+
     var lastMessage :String?=null
     var profilepic :String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,7 +80,7 @@ class ChatActivity : AppCompatActivity() {
 
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+              Log.d("error",error.toString())
             }
 
         })
@@ -91,7 +93,8 @@ class ChatActivity : AppCompatActivity() {
 
             if (messagebox.text.isEmpty()) {
                 messagebox.setError("message is required")
-            } else {
+            }
+            else {
                 val messageObject = message(messages, senderUid,formatted)
                 mDref.child("Chats").child(sendereroom!!).child("chating")
                     .push().setValue(messageObject).addOnSuccessListener {
@@ -113,7 +116,7 @@ class ChatActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==R.id.delete){
+        if(item.itemId== R.id.delete){
             AlertDialog.Builder(this)
                 .setTitle("Alert")
                 .setMessage("Do You Want To Delete The Chats?")

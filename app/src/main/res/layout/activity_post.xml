@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".PostActivity">
+    tools:context=".Activities.PostActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_margin="15dp"
@@ -15,21 +15,22 @@
         android:layout_height="250dp" >
         <ImageView
             android:id="@+id/postImage"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
 
             android:layout_gravity="center"/>
     </androidx.cardview.widget.CardView>
 
-    <EditText
-        android:id="@+id/PersonName2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Name"
-        android:inputType="textPersonName"
-        android:padding="12dp" />
 
+
+    <Button
+        android:id="@+id/choose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="choose" />
     <Button
         android:id="@+id/upload"
         android:layout_width="wrap_content"

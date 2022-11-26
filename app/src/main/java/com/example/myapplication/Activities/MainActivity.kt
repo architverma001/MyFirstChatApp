@@ -1,26 +1,23 @@
-package com.example.myapplication
+package com.example.myapplication.Activities
 
-import android.app.Activity
 import android.app.AlertDialog
-import android.app.Dialog
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.SearchView
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Adapters.UserAdapter
+import com.example.myapplication.R
+import com.example.myapplication.Authentication.login
+import com.example.myapplication.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.user_layout.*
-import kotlinx.android.synthetic.main.user_layout.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -38,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         profileImg = findViewById(R.id.search_view_my_profile);
         profileImg.setOnClickListener{
-            val intent = Intent(this@MainActivity,PostActivity::class.java)
+            val intent = Intent(this@MainActivity, PostActivity::class.java)
             startActivity(intent)
         }
         userList = ArrayList()
@@ -79,6 +76,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.userRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
+        recyclerView.animate()
         mDbref = FirebaseDatabase.getInstance().reference
         mDbref.child("user").addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -126,19 +124,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==R.id.logout){
+        if(item.itemId== R.id.logout){
             mAuth.signOut()
             Toast.makeText(baseContext,"user Logged out",Toast.LENGTH_SHORT).show()
-            val intent = Intent(baseContext,login::class.java)
+            val intent = Intent(baseContext, login::class.java)
             startActivity(intent)
             return true
         }
 
 
-        if(item.itemId==R.id.gchat){
-            val intents = Intent(this@MainActivity,GroupChat::class.java)
-            Toast.makeText(this,"Directed to posts",Toast.LENGTH_SHORT).show()
-            startActivity(intents)
+        if(item.itemId== R.id.gchat){
+            val intent = Intent(this@MainActivity, GroupChat::class.java)
+            Toast.makeText(this,"Directed to Group chat",Toast.LENGTH_SHORT).show()
+
+            startActivity(intent)
             return true
 
         }

@@ -1,19 +1,18 @@
-package com.example.myapplication
+package com.example.myapplication.Authentication
 
 import android.app.ProgressDialog
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.myapplication.Activities.MainActivity
+import com.example.myapplication.R
+import com.example.myapplication.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_signup.*
-import nl.dionsegijn.konfetti.xml.KonfettiView
 
 class Signup : AppCompatActivity() {
     private lateinit var etname :EditText
@@ -62,7 +61,7 @@ class Signup : AppCompatActivity() {
 
         val currentUser = auth.currentUser
         if(currentUser != null){
-            val intent = Intent(this@Signup,MainActivity::class.java)
+            val intent = Intent(this@Signup, MainActivity::class.java)
             finish()
             startActivity(intent)
         }
@@ -75,7 +74,7 @@ class Signup : AppCompatActivity() {
                 if (task.isSuccessful) {
                     loader.dismiss()
                     addUserToDatabase(name,email,auth.currentUser?.uid!!)
-                   val intent = Intent(this@Signup,MainActivity::class.java)
+                   val intent = Intent(this@Signup, MainActivity::class.java)
                     finish()
                     startActivity(intent)
 
@@ -94,6 +93,7 @@ class Signup : AppCompatActivity() {
 
     private fun addUserToDatabase(name: String, email: String, uid: String) {
    mDbRef = FirebaseDatabase.getInstance().getReference()
+
         mDbRef.child("user").child(uid).setValue(User(name,email,uid))
     }
 }
